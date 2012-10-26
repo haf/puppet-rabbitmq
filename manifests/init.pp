@@ -14,10 +14,22 @@ class rabbitmq (
 {
   require rabbitmq::params
 
-  include rabbitmq::package
+  anchor { 'rabbitmq::start': }
+
+  class { 'rabbitmq::package':
+    require => Anchor[rabbitmq::start],
+    before  => Anchor[rabbitmq::end],
+  } ->
   class { 'rabbitmq::config':
-    plugins => $plugins
+    plugins => $plugins,
+    require => Anchor[rabbitmq::start],
+    before  => Anchor[rabbitmq::end],
+  } ->
+  class { 'rabbitmq::service': 
+    require => Anchor[rabbitmq::start],
+    before  => Anchor[rabbitmq::end],
   }
-  include rabbitmq::service
+
+  anchor { 'rabbitmq::end': }
 
 }
