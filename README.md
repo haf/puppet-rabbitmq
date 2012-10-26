@@ -7,6 +7,7 @@ mappings.
 ## Dependencies
 
  * `concat` from [puppetlabs/concat](git://github.com/ripienaar/puppet-concat.git).
+ * `hiera` IF puppet < 3.0, otherwise it's bundled in puppet.
 
 ## API
 
