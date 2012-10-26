@@ -8,13 +8,12 @@
 #   vhostpath => '/', #default
 #   $conf     => "^amq.gen-.*",
 #   $write    => ".*",
-#   $read     => ".*";
+#   $read     => ".*",
 # }
 # rabbitmq::permission { "myuser":
 #   ensure => "absent",
 #   vhostpath => '/', #default
 # }
-#
 #
 define rabbitmq::permission(
   $conf, $write, $read,
