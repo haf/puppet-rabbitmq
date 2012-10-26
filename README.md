@@ -9,6 +9,9 @@ mappings.
  * `concat` from [puppetlabs/concat](git://github.com/ripienaar/puppet-concat.git).
  * `hiera` IF puppet < 3.0, otherwise it's bundled in puppet.
 
+If you are running CentOS or RHEL, you'll need the EPEL repository. I can
+recommend having a look at https://github.com/stahnma/puppet-module-epel.
+
 ## API
 
 These are the types available in the API of this module.
