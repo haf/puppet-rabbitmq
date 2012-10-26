@@ -50,6 +50,24 @@ include rabbitmq::stomp
 Enables the STOMP RabbitMQ plugin. 
 WARNING: WILL OVERWRITE `/etc/rabbitmq/rabbitmq.config` in its current format.
 
+### define `rabbitmq::permission`
+
+```puppet
+rabbitmq::permission { "myuser":
+  vhostpath => '/', #default
+  $conf     => "^amq.gen-.*",
+  $write    => ".*",
+  $read     => ".*";
+}
+rabbitmq::permission { "myuser":
+  ensure => "absent",
+  vhostpath => '/', #default
+}
+```
+
+Creates or removes permissions
+
+
 ### More types:
 ... have a look in manifests - most things are configurable.
 
