@@ -9,7 +9,7 @@
 #   }
 #
 class rabbitmq (
-  $plugins = $rabbitmq::params::plugins
+  $plugins = hiera('plugins', $rabbitmq::params::plugins)
 )
 {
   require rabbitmq::params
@@ -17,17 +17,25 @@ class rabbitmq (
   anchor { 'rabbitmq::start': }
 
   class { 'rabbitmq::package':
-    require => Anchor[rabbitmq::start],
-    before  => Anchor[rabbitmq::end],
-  } ->
+    require => Anchor['rabbitmq::start'],
+    before  => Anchor['rabbitmq::end'],
+  }
+
   class { 'rabbitmq::config':
     plugins => $plugins,
-    require => Anchor[rabbitmq::start],
-    before  => Anchor[rabbitmq::end],
-  } ->
+    require => [
+      Class['rabbitmq::package'],
+      Anchor['rabbitmq::start'],
+    ],
+    before  => Anchor['rabbitmq::end'],
+  }
+
   class { 'rabbitmq::service': 
-    require => Anchor[rabbitmq::start],
-    before  => Anchor[rabbitmq::end],
+    require => [
+      Class['rabbitmq::config'],
+      Anchor['rabbitmq::start'],
+    ],
+    before  => Anchor['rabbitmq::end'],
   }
 
   anchor { 'rabbitmq::end': }
