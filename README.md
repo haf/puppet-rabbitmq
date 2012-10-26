@@ -30,6 +30,29 @@ rabbitmq::vhost { 'development':
 }
 ```
 
+### class `rabbitmq::ssl`
+
+```puppet
+include rabbitmq::ssl
+```
+
+Generates a simple SSL self-signed certificate.
+
+### class `rabbitmq::stomp`
+
+```puppet
+class { 'rabbitmq':
+  plugins => true,
+}
+include rabbitmq::stomp
+```
+
+Enables the STOMP RabbitMQ plugin. 
+WARNING: WILL OVERWRITE `/etc/rabbitmq/rabbitmq.config` in its current format.
+
+### More types:
+... have a look in manifests - most things are configurable.
+
 ## Notes
 
 Ugly hack to enabled stomp support added (Kris Buytaert)
