@@ -5,7 +5,7 @@
 #
 # Usage:
 #
-# rabbitmq::vhost { "myuser":
+# rabbitmq::vhost { 'myuser':
 # }
 #
 #

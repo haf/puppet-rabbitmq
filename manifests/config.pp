@@ -5,10 +5,11 @@
 #
 #   include rabbitmq::config
 #
-class rabbitmq::config($plugins=$rabbitmq::params::plugins)
+class rabbitmq::config(
+  $plugins = $rabbitmq::params::plugins
+)
 {
-
-  if $plugins != 'no'
+  if $plugins
   {
     include concat::setup
     concat {'/etc/rabbitmq/enabled_plugins':
@@ -24,5 +25,4 @@ class rabbitmq::config($plugins=$rabbitmq::params::plugins)
       order   => 0,
     }
   }
-
 }

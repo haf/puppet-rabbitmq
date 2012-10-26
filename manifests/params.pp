@@ -1,5 +1,5 @@
 class rabbitmq::params(
-  $plugins='no'
+  $plugins = false
 ){
 }
 

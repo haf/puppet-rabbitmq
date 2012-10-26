@@ -8,6 +8,8 @@
 class rabbitmq::package {
 
   # Ensure rabbitmq is installed:
-  package { 'rabbitmq-server': ensure => 'present', }
+  package { 'rabbitmq-server': 
+    ensure => 'present', 
+  }
 
 }

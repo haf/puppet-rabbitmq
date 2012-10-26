@@ -1,18 +1,23 @@
-# = Class: rabbitmq::service
+# = Class: rabbitmq
 #
 # Installs and runs the rabbitmq messaging server: http://www.rabbitmq.com/.
 #
 # == Usage:
 #
-#   include rabbitmq
+#   class { 'rabbitmq':
+#     plugins => true   #optional
+#   }
 #
 class rabbitmq (
-  $plugins=$rabbitmq::params::plugins
+  $plugins = $rabbitmq::params::plugins
 )
 {
   require rabbitmq::params
+
   include rabbitmq::package
-  include rabbitmq::config
+  class { 'rabbitmq::config':
+    plugins => $plugins
+  }
   include rabbitmq::service
 
 }
