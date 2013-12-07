@@ -120,8 +120,6 @@ class rabbitmq(
   case $::osfamily {
     'RedHat', 'SUSE':
       { include '::rabbitmq::repo::rhel' }
-    'Debian':
-      { include '::rabbitmq::repo::apt' }
     default:
       { }
   }
