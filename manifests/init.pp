@@ -51,6 +51,7 @@ class rabbitmq(
   $environment_variables      = $rabbitmq::params::environment_variables,
   $config_variables           = $rabbitmq::params::config_variables,
   $config_kernel_variables    = $rabbitmq::params::config_kernel_variables,
+  $manage_firewall            = hiera('manage_firewall', false)
 ) inherits rabbitmq::params {
 
   validate_bool($admin_enable)
@@ -160,4 +161,12 @@ class rabbitmq(
   Class['::rabbitmq::install'] -> Rabbitmq_plugin<| |>
   Class['::rabbitmq::install::rabbitmqadmin'] -> Rabbitmq_exchange<| |>
 
+  if $manage_firewall {
+    firewall { "203 allow rabbitmq:$port":
+      proto  => 'tcp',
+      state  => ['NEW'],
+      dport  => $port,
+      action => 'accept',
+    }
+  }
 }
